@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bander Sidiq — Applied ML for Search</title>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F7F8FA;
+    --surface: #FFFFFF;
+    --text: #14181F;
+    --muted: #55606F;
+    --accent: #1A52B0;
+    --accent-tint: #E7EEFB;
+    --border: #DDE3EC;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.65;
+  }
+  h1, h2 { font-family: 'Lora', Georgia, serif; font-weight: 600; }
+  a { color: var(--accent); }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 1.5rem; }
+
+  header {
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  header .wrap { display: flex; align-items: center; gap: 0.6rem; }
+  header img { width: 32px; height: 32px; }
+  header span { font-family: 'Lora', serif; font-size: 1.05rem; }
+
+  .hero {
+    padding: 4.5rem 0 3.5rem;
+    text-align: center;
+  }
+  .hero h1 {
+    font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+    line-height: 1.25;
+    max-width: 34ch;
+    margin: 0 auto 1.1rem;
+  }
+  .hero p.sub {
+    color: var(--muted);
+    max-width: 46ch;
+    margin: 0 auto 2rem;
+    font-size: 1.02rem;
+  }
+  .cta {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.75rem 1.6rem;
+    border-radius: 6px;
+  }
+  .cta:hover { opacity: 0.92; }
+
+  section { padding: 3rem 0; }
+  section.case { border-top: 1px solid var(--border); }
+  .eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  section.case h2 { font-size: 1.6rem; margin-bottom: 0.75rem; }
+  section.case > .wrap > p { max-width: 62ch; color: var(--muted); margin-bottom: 1.75rem; }
+
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  @media (max-width: 640px) { .stat-row { grid-template-columns: 1fr; } }
+  .stat {
+    background: var(--accent-tint);
+    border-radius: 8px;
+    padding: 1.1rem 1.2rem;
+  }
+  .stat .num { font-family: 'Lora', serif; font-size: 1.6rem; color: var(--accent); }
+  .stat .lbl { font-size: 0.85rem; color: var(--muted); margin-top: 0.2rem; }
+
+  .chart-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+  }
+  @media (max-width: 640px) { .chart-grid { grid-template-columns: 1fr; } }
+  .chart-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.75rem;
+    box-shadow: 0 1px 3px rgba(20,24,31,0.06);
+  }
+  .chart-card img { width: 100%; height: auto; display: block; }
+  .chart-card figcaption {
+    font-size: 0.8rem;
+    color: var(--muted);
+    padding: 0.5rem 0.25rem 0.1rem;
+  }
+
+  .note-box {
+    background: var(--surface);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 0.9rem 1.1rem;
+    font-size: 0.92rem;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .secondary-cta { font-weight: 600; }
+
+  section.about { border-top: 1px solid var(--border); }
+  .about-row { display: flex; gap: 1.5rem; align-items: flex-start; }
+  @media (max-width: 560px) { .about-row { flex-direction: column; } }
+  .photo-placeholder {
+    width: 110px; height: 110px; border-radius: 50%;
+    background: var(--accent-tint);
+    border: 1.5px dashed var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Lora', serif; color: var(--accent); font-size: 0.75rem;
+    text-align: center; padding: 0.5rem; flex-shrink: 0;
+  }
+  .about-row p { color: var(--muted); max-width: 52ch; }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 0 3rem;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  footer a { margin: 0 0.5rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <img src="assets/logo.svg" alt="BS logo">
+    <span>Bander Sidiq</span>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <h1>I turn raw search and ranking data into models people can actually trust and act on.</h1>
+    <p class="sub">Applied ML for search &amp; discoverability — readable models, honest numbers, no black boxes.</p>
+    <a class="cta" href="https://github.com/Bander03/FlyRank_Intern" target="_blank" rel="noopener">View the code on GitHub</a>
+  </div>
+</section>
+
+<section class="case">
+  <div class="wrap">
+    <div class="eyebrow">Case study</div>
+    <h2>FlyRank Content Refresh Model</h2>
+    <p>
+      Ranking which pages to review first is normally a gut call. This project replaces the gut
+      call with a transparent model, trained and validated on FlyRank's anonymized search data,
+      then checked against a hand-written baseline so the improvement is measured, not assumed.
+    </p>
+
+    <div class="stat-row">
+      <div class="stat">
+        <div class="num">0.24 → 0.74</div>
+        <div class="lbl">Precision@50, rule baseline → random forest</div>
+      </div>
+      <div class="stat">
+        <div class="num">~3×</div>
+        <div class="lbl">Lift in review-queue accuracy</div>
+      </div>
+      <div class="stat">
+        <div class="num">30,000</div>
+        <div class="lbl">Anonymized pages scored, client-holdout split</div>
+      </div>
+    </div>
+
+    <div class="chart-grid">
+      <figure class="chart-card">
+        <img src="assets/charts/top_feature_importance.svg" alt="Bar chart of top model feature importances">
+        <figcaption>What the model actually uses — inspectable, not a black box.</figcaption>
+      </figure>
+      <figure class="chart-card">
+        <img src="assets/charts/action_mix.svg" alt="Bar chart of suggested action mix from the model">
+        <figcaption>Every prediction resolves to a reviewer action, not an auto-publish call.</figcaption>
+      </figure>
+    </div>
+
+    <div class="note-box">
+      These are the pipeline's own generated charts and numbers (see
+      <code>outputs/model_report.md</code> in the repo) — decision-support for a human reviewer,
+      not a claim about Google's actual ranking algorithm.
+    </div>
+
+    <a class="secondary-cta" href="https://github.com/Bander03/FlyRank_Intern/blob/main/outputs/model_report.md" target="_blank" rel="noopener">Read the full model report →</a>
+  </div>
+</section>
+
+<section class="about">
+  <div class="wrap">
+    <div class="eyebrow">About</div>
+    <div class="about-row">
+      <div class="photo-placeholder">photo<br>coming soon</div>
+      <p>
+        I'm an ML intern working on applied search intelligence — turning FlyRank's real search
+        data into models that are explainable enough for a reviewer to actually trust and use.
+        Real photo pending; this placeholder is intentional rather than an AI-generated stand-in.
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <a href="https://github.com/Bander03" target="_blank" rel="noopener">GitHub</a>
+  ·
+  <a href="mailto:banderkingd@gmail.com">Email</a>
+</footer>
+
+</body>
+</html>
