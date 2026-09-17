@@ -4,6 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bander Sidiq — Applied ML for Search</title>
+<meta name="description" content="Bander Sidiq builds applied ML models for search ranking and content decisions — readable models, honest numbers, no black boxes. See the FlyRank content-refresh case study.">
+<link rel="canonical" href="https://bander03.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Bander Sidiq — Applied ML for Search">
+<meta property="og:description" content="Applied ML for search & discoverability — readable models, honest numbers, no black boxes.">
+<meta property="og:url" content="https://bander03.github.io/">
+<meta property="og:image" content="https://bander03.github.io/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Bander Sidiq — Applied ML for Search">
+<meta name="twitter:description" content="Applied ML for search & discoverability — readable models, honest numbers, no black boxes.">
+<meta name="twitter:image" content="https://bander03.github.io/assets/og-image.png">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -239,11 +252,12 @@
 
 <header>
   <div class="wrap">
-    <img src="assets/logo.svg" alt="BS logo">
+    <img src="assets/logo.svg" alt="BS logo" width="32" height="32">
     <span>Bander Sidiq</span>
   </div>
 </header>
 
+<main>
 <section class="hero">
   <div class="wrap">
     <h1>I turn raw search and ranking data into models people can actually trust and act on.</h1>
@@ -288,12 +302,12 @@
 
     <div class="chart-grid">
       <figure class="chart-card">
-        <img src="assets/charts/top_feature_importance.svg" alt="Bar chart of top model feature importances">
+        <img src="assets/charts/top_feature_importance.svg" alt="Bar chart of top model feature importances" width="960" height="520">
         <figcaption>What the model actually uses — inspectable, not a black box.</figcaption>
         <div class="chart-scroll-hint">Scroll to see the full chart →</div>
       </figure>
       <figure class="chart-card">
-        <img src="assets/charts/action_mix.svg" alt="Bar chart of suggested action mix from the model">
+        <img src="assets/charts/action_mix.svg" alt="Bar chart of suggested action mix from the model" width="960" height="520">
         <figcaption>Every prediction resolves to a reviewer action, not an auto-publish call.</figcaption>
         <div class="chart-scroll-hint">Scroll to see the full chart →</div>
       </figure>
@@ -391,12 +405,20 @@
     </form>
   </div>
 </section>
+</main>
 
 <script>
   const form = document.getElementById('contact-form');
   const status = document.getElementById('contact-status');
+  const submitBtn = form.querySelector('button[type="submit"]');
+  let sending = false;
   form.addEventListener('submit', async function (e) {
     e.preventDefault();
+    // A fast double-click/double-tap fires two submit events before the first
+    // request resolves -- without this guard the message gets sent twice.
+    if (sending) return;
+    sending = true;
+    submitBtn.disabled = true;
     status.className = '';
     status.textContent = 'Sending…';
     const formData = new FormData(form);
@@ -418,6 +440,9 @@
     } catch (err) {
       status.className = 'err';
       status.textContent = 'Network error — try again or email me directly.';
+    } finally {
+      sending = false;
+      submitBtn.disabled = false;
     }
   });
 </script>
