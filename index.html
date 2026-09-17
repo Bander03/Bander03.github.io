@@ -252,7 +252,6 @@
     <div class="link-row">
       <a class="pill" href="https://www.linkedin.com/in/bander-sdiq/" target="_blank" rel="noopener">LinkedIn</a>
       <a class="pill" href="https://github.com/Bander03" target="_blank" rel="noopener">GitHub</a>
-      <a class="pill todo" href="#" title="TODO: link a hosted CV/resume here">CV (add link)</a>
       <a class="pill todo" href="mailto:banderkingd@gmail.com" title="No booking link yet — email as a stand-in">Book a time (email for now)</a>
     </div>
   </div>
@@ -282,6 +281,10 @@
         <div class="lbl">Anonymized pages scored, client-holdout split</div>
       </div>
     </div>
+    <p style="font-size: 0.85rem; color: var(--muted); margin: -1.2rem 0 1.75rem;">
+      That jump is measured on this pipeline's own held-out split, not a claim about Google's
+      ranking algorithm — <a href="#why-not-marketing">why that matters ↓</a>
+    </p>
 
     <div class="chart-grid">
       <figure class="chart-card">
@@ -296,10 +299,31 @@
       </figure>
     </div>
 
-    <div class="note-box">
+    <div class="note-box" id="why-not-marketing">
       These are the pipeline's own generated charts and numbers (see
       <code>outputs/model_report.md</code> in the repo) — decision-support for a human reviewer,
       not a claim about Google's actual ranking algorithm.
+    </div>
+
+    <div style="margin-bottom: 1.75rem;">
+      <h3 style="font-family: 'Lora', serif; font-size: 1.05rem; margin-bottom: 0.6rem;">Behind the model — the decisions, not just the score</h3>
+      <p style="color: var(--muted); max-width: 62ch; margin-bottom: 0.6rem;">
+        I chose Logistic Regression first, then Random Forest — readable baseline before a
+        stronger model, so a wrong feature would show up early, not get buried. Baseline vs.
+        model are compared on the exact same held-out split and metric, not separately reported
+        numbers that happen to look good next to each other.
+      </p>
+      <p style="color: var(--muted); max-width: 62ch; margin-bottom: 0.6rem;">
+        The hardest call: an earlier signal-audit pass found that search position does
+        <em>not</em> predict click-through rate as cleanly as the industry rule of thumb assumes
+        — CTR peaked around position 4-5, not position 1. That result directly shaped this
+        model's feature set (position is used, but not trusted blindly).
+      </p>
+      <p style="color: var(--muted); max-width: 62ch;">
+        Reported honestly, not smoothed over: Logistic Regression actually beat Random Forest at
+        one evaluation cutoff (precision@100) despite losing at others — a real, if less tidy,
+        result kept in the write-up rather than dropped for a cleaner story.
+      </p>
     </div>
 
     <a class="secondary-cta" href="https://github.com/Bander03/FlyRank_Intern/blob/main/outputs/model_report.md" target="_blank" rel="noopener">Read the full model report →</a>
@@ -331,7 +355,7 @@
     <ul style="color: var(--muted); padding-left: 1.2rem; line-height: 1.9;">
       <li><a href="https://github.com/Bander03/Bander03.github.io/blob/main/capstone-agent-spec.md" target="_blank" rel="noopener">Capstone agent spec — Daily Search-AI Beat</a></li>
       <li><a href="https://github.com/Bander03/Bander03.github.io/tree/main/workflows" target="_blank" rel="noopener">Build notes — no-code workflows &amp; agent tooling</a></li>
-      <li>Capstone write-up — <span style="font-style: italic;">coming as the track finishes</span></li>
+      <li>Capstone write-up — <span style="font-style: italic;">in progress, publishing as the track wraps up</span></li>
     </ul>
   </div>
 </section>
@@ -340,6 +364,9 @@
   <div class="wrap">
     <div class="eyebrow">Get in touch</div>
     <h2 style="font-size: 1.3rem; margin-bottom: 0.75rem;">Send a real message</h2>
+    <p style="color: var(--accent); font-weight: 600; max-width: 62ch; margin-bottom: 0.5rem;">
+      Open to ML/AI opportunities and research collaborations.
+    </p>
     <p style="color: var(--muted); max-width: 62ch; margin-bottom: 1.5rem;">
       This form goes straight to my inbox — no newsletter, no auto-reply, just a real message.
     </p>
